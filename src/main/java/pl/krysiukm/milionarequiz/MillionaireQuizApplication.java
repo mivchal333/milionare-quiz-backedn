@@ -4,10 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MilionareQuizApplication {
+public class MillionaireQuizApplication {
+    public static void main(String[] args) {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MilionareQuizApplication.class, args);
-	}
+        SpringApplication.run(MillionaireQuizApplication.class, args);
+
+
+    }
 
 }

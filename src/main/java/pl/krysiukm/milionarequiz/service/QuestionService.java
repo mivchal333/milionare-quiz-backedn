@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface QuestionService {
-    List<Question> readPackage(Difficulty difficulty);
+    List<Question> getQuestions(Difficulty difficulty);
 
     Optional<Question> getQuestion(Long id);
+
+    List<Question> getQuestions(Difficulty difficulty, int limit);
 }

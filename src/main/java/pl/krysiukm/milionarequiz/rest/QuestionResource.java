@@ -28,9 +28,11 @@ public class QuestionResource {
     private final BeanHelper beanHelper;
 
     @RequestMapping("/difficulty")
-    ResponseEntity<List<QuestionBean>> getQuestions(@RequestParam(defaultValue = "NORMAL", name = "difficulty") String difficultyParam) {
+    ResponseEntity<List<QuestionBean>> getQuestions(
+            @RequestParam(defaultValue = "NORMAL", name = "difficulty") String difficultyParam,
+            @RequestParam(defaultValue = "20") int limit) {
         Difficulty difficulty = validator.validateDifficulty(difficultyParam);
-        List<Question> questions = questionService.readPackage(difficulty);
+        List<Question> questions = questionService.getQuestions(difficulty, limit);
 
         List<QuestionBean> beans = questions.stream()
                 .map(beanHelper::getQuestionBean)

@@ -2,6 +2,8 @@ package pl.krysiukm.milionarequiz.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.krysiukm.milionarequiz.model.Difficulty;
 import pl.krysiukm.milionarequiz.model.Question;
@@ -17,12 +19,18 @@ public class QuestionServiceImpl implements QuestionService {
     private final QuestionRepository questionRepository;
 
     @Override
-    public List<Question> readPackage(Difficulty difficulty) {
+    public List<Question> getQuestions(Difficulty difficulty) {
         return questionRepository.findAllByDifficulty(difficulty);
     }
 
     @Override
     public Optional<Question> getQuestion(Long id) {
         return questionRepository.findById(id);
+    }
+
+    @Override
+    public List<Question> getQuestions(Difficulty difficulty, int limit) {
+        Page<Question> questionsPage = questionRepository.findAll(PageRequest.of(0, limit));
+        return questionsPage.getContent();
     }
 }

@@ -11,7 +11,7 @@ import pl.krysiukm.milionarequiz.rest.exception.BadRequestResponseException;
 public class QuestionResourceValidator {
 
     public Difficulty validateDifficulty(String difficultyParam) {
-        Difficulty difficulty = null;
+        Difficulty difficulty;
         if (StringUtils.isBlank(difficultyParam)) {
             throw new BadRequestResponseException();
         } else {
@@ -19,6 +19,7 @@ public class QuestionResourceValidator {
                 difficulty = Difficulty.valueOf(StringUtils.upperCase(difficultyParam));
             } catch (IllegalArgumentException e) {
                 log.warn("Incorrect get questions by difficulty request parameter: {}", e.getMessage());
+                throw new BadRequestResponseException();
             }
         }
         return difficulty;

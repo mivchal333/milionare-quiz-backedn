@@ -1,5 +1,10 @@
 package pl.krysiukm.milionarequiz.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
+import pl.krysiukm.milionarequiz.model.serializer.PrizeSerializer;
+
+@JsonSerialize(using = PrizeSerializer.class)
 public enum Prize {
     P_500(500),
     P_2000(2_000),
@@ -13,9 +18,15 @@ public enum Prize {
     P_500_000(500_000),
     P_1_000_000(1_000_000);
 
+    @Getter
     private final int value;
 
     Prize(int value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

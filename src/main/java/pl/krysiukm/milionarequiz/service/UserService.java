@@ -6,11 +6,11 @@ import pl.krysiukm.milionarequiz.model.User;
 import pl.krysiukm.milionarequiz.repository.UserRepository;
 
 @Service
-public class RegistrationService {
+public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public RegistrationService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

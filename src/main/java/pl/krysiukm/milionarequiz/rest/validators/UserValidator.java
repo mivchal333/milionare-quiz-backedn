@@ -27,9 +27,8 @@ public class UserValidator {
         }
     }
 
-    public void validateUserExist(User user) {
-        if (!userRepository.findById(user.getUsername()).isPresent()) {
-            throw new BadRequestResponseException();
-        }
+    public boolean validateUserCredentials(User user) {
+        if (user == null || user.getUsername() == null || user.getPassword() == null) return false;
+        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword()).isPresent();
     }
 }

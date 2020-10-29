@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.krysiukm.milionarequiz.model.User;
 import pl.krysiukm.milionarequiz.rest.validators.UserValidator;
-import pl.krysiukm.milionarequiz.service.RegistrationService;
+import pl.krysiukm.milionarequiz.service.UserService;
 
 @RestController
 @RequestMapping("/register")
 public class RegistrationResource {
     private final UserValidator userValidator;
-    private final RegistrationService registrationService;
+    private final UserService userService;
 
     @Autowired
-    public RegistrationResource(UserValidator userValidator, RegistrationService registrationService) {
+    public RegistrationResource(UserValidator userValidator, UserService userService) {
         this.userValidator = userValidator;
-        this.registrationService = registrationService;
+        this.userService = userService;
     }
 
     @PostMapping
     public User registerUser(@RequestBody User user) {
         userValidator.validateRegistrationAttempt(user);
-        return registrationService.registerUser(user);
+        return userService.registerUser(user);
     }
 }

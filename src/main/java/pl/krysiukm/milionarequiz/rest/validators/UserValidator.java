@@ -8,6 +8,8 @@ import pl.krysiukm.milionarequiz.model.User;
 import pl.krysiukm.milionarequiz.repository.UserRepository;
 import pl.krysiukm.milionarequiz.rest.exception.BadRequestResponseException;
 
+import java.util.Optional;
+
 @Component
 @Slf4j
 public class UserValidator {
@@ -27,8 +29,8 @@ public class UserValidator {
         }
     }
 
-    public boolean validateUserCredentials(User user) {
-        if (user == null || user.getUsername() == null || user.getPassword() == null) return false;
-        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword()).isPresent();
+    public Optional<User> validateUserCredentials(User user) {
+        if (user == null || user.getUsername() == null || user.getPassword() == null) return Optional.empty();
+        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 }

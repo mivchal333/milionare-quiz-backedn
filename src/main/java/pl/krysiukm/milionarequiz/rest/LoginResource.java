@@ -1,11 +1,11 @@
 package pl.krysiukm.milionarequiz.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.krysiukm.milionarequiz.model.User;
 import pl.krysiukm.milionarequiz.rest.validators.UserValidator;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/login")
@@ -20,7 +20,7 @@ public class LoginResource {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity login(@RequestBody User user) {
-        return userValidator.validateUserCredentials(user) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.UNAUTHORIZED);
+    public Optional<User> login(@RequestBody User user) {
+        return userValidator.validateUserCredentials(user);
     }
 }

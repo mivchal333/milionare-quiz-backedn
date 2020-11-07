@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.krysiukm.milionarequiz.model.User;
 import pl.krysiukm.milionarequiz.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -15,7 +17,10 @@ public class UserService {
     }
 
     public User registerUser(User user) {
-
         return userRepository.save(user);
+    }
+
+    public Optional<User> getUser(String username) {
+        return userRepository.findById(username);
     }
 }

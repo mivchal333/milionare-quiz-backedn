@@ -7,7 +7,7 @@ import pl.krysiukm.milionarequiz.model.serialization.PrizeSerializer;
 @JsonSerialize(using = PrizeSerializer.class)
 public enum Prize {
     P_0(0),
-    P_500(500),
+    P_500(1_000),
     P_2_000(2_000),
     P_5_000(5_000),
     P_10_000(10_000),
@@ -34,7 +34,7 @@ public enum Prize {
 
     public static Prize fromInteger(int x) {
         switch (x) {
-            case 500:
+            case 1_000:
                 return P_500;
             case 2_000:
                 return P_2_000;
@@ -54,8 +54,9 @@ public enum Prize {
                 return P_250_000;
             case 500_000:
                 return P_500_000;
+            case 1_000_000:
+                return P_1_000_000;
         }
-        return P_0
-                ;
+        return P_0;
     }
 }

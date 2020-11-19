@@ -5,13 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.krysiukm.milionarequiz.bean.QuestionBean;
-import pl.krysiukm.milionarequiz.model.Difficulty;
 import pl.krysiukm.milionarequiz.model.Question;
 import pl.krysiukm.milionarequiz.rest.exception.BadRequestResponseException;
-import pl.krysiukm.milionarequiz.rest.validators.QuestionResourceValidator;
 import pl.krysiukm.milionarequiz.service.BeanHelper;
 import pl.krysiukm.milionarequiz.service.QuestionService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,21 +20,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class QuestionResource {
     private final QuestionService questionService;
-    private final QuestionResourceValidator validator;
     private final BeanHelper beanHelper;
 
-    @CrossOrigin
     @RequestMapping
-    ResponseEntity<List<QuestionBean>> getQuestions(
-            @RequestParam(defaultValue = "NORMAL", name = "difficulty") String difficultyParam,
-            @RequestParam(defaultValue = "20") int limit) {
-        Difficulty difficulty = validator.validateDifficulty(difficultyParam);
-        List<Question> questions = questionService.getQuestions(difficulty, limit);
+    ResponseEntity<List<QuestionBean>> getQuestions() {
+        List<Question> questions = questionService.getQuestions();
 
         List<QuestionBean> beans = questions.stream()
                 .map(beanHelper::getQuestionBean)
                 .collect(Collectors.toList());
 
+        Collections.shuffle(beans);
+        int maxQuestionsLength = 13;
+        if (beans.size() > maxQuestionsLength) {
+            beans = beans.subList(0, maxQuestionsLength);
+        }
         return ResponseEntity.ok(beans);
     }
 
@@ -49,5 +48,13 @@ public class QuestionResource {
         QuestionBean bean = beanHelper.getQuestionBean(question.get());
 
         return ResponseEntity.ok(bean);
+    }
+
+    @PostMapping
+    ResponseEntity<Question> importQuestion(@RequestBody QuestionBean questionBean) {
+        Question question = beanHelper.getQuestion(questionBean);
+        Question updated = questionService.saveQuestion(question);
+
+        return ResponseEntity.ok(updated);
     }
 }

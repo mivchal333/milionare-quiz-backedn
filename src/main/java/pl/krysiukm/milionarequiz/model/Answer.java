@@ -1,6 +1,7 @@
 package pl.krysiukm.milionarequiz.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Answer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,4 +20,9 @@ public class Answer implements Serializable {
 
     private String content;
     private Date editDate;
+
+    public Answer(String content) {
+        this.content = content;
+        editDate = new Date();
+    }
 }

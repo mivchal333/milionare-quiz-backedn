@@ -22,10 +22,26 @@ public class BeanHelper {
         bean.setIncorrectAnswers(incorrectQuestions);
 
         Difficulty difficulty = question.getDifficulty();
-        bean.setDifficulty(difficulty.toString());
+        if (difficulty != null) {
+            bean.setDifficulty(difficulty.toString());
+        }
 
         bean.setCorrectAnswer(question.getCorrectAnswer().getContent());
 
         return bean;
+    }
+
+    public Question getQuestion(QuestionBean questionBean) {
+        Question question = new Question();
+        question.setQuestion(questionBean.getQuestion());
+
+        question.setCorrectAnswer(new Answer(questionBean.getCorrectAnswer()));
+
+        question.setIncorrectAnswers(
+                questionBean.getIncorrectAnswers()
+                        .stream()
+                        .map(Answer::new)
+                        .collect(Collectors.toList()));
+        return question;
     }
 }

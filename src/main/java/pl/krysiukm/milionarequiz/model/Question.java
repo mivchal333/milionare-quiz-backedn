@@ -1,6 +1,7 @@
 package pl.krysiukm.milionarequiz.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,11 +19,12 @@ public class Question implements Serializable {
 
     private String question;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Answer correctAnswer;
 
-    @OneToMany(targetEntity = Answer.class)
+    @OneToMany(targetEntity = Answer.class, cascade = CascadeType.ALL)
     private List<Answer> incorrectAnswers;
 
+    @JsonIgnoreProperties
     private Difficulty difficulty;
 }

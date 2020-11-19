@@ -12,4 +12,12 @@ public interface QuestionService {
     Optional<Question> getQuestion(Long id);
 
     List<Question> getQuestions(Difficulty difficulty, int limit);
+
+    List<Question> saveQuestions(List<Question> questions);
+
+    Question saveQuestion(Question question);
+
+    List<Question> getQuestions();
+
+    void initializeQuestions();
 }

@@ -140,6 +140,8 @@ public class QuestionServiceImpl implements QuestionService {
                 , question12);
         List<Question> questions = questionBeans.stream().map(beanHelper::getQuestion)
                 .collect(Collectors.toList());
-        questionRepository.saveAll(questions);
+        if (questionRepository.count() == 0) {
+            questionRepository.saveAll(questions);
+        }
     }
 }

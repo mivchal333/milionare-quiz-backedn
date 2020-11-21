@@ -31,7 +31,7 @@ public class QuestionResource {
                 .collect(Collectors.toList());
 
         Collections.shuffle(beans);
-        int maxQuestionsLength = 13;
+        int maxQuestionsLength = 12;
         if (beans.size() > maxQuestionsLength) {
             beans = beans.subList(0, maxQuestionsLength);
         }

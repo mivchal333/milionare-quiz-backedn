@@ -76,8 +76,8 @@ public class QuestionServiceImpl implements QuestionService {
                 .build();
         QuestionBean question4 = QuestionBean.builder()
                 .question("Is String a primitive data type?")
-                .correctAnswer("Yes")
-                .incorrectAnswers(Arrays.asList("No"))
+                .correctAnswer("No")
+                .incorrectAnswers(Arrays.asList("Yes"))
                 .build();
         QuestionBean question5 = QuestionBean.builder()
                 .question("Which method to use to find length of a string?")

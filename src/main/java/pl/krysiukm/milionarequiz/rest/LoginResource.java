@@ -8,6 +8,7 @@ import pl.krysiukm.milionarequiz.rest.validators.UserValidator;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/login")
 public class LoginResource {
 

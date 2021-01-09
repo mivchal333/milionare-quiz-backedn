@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface StatisticsRepository extends JpaRepository<HistoryEntry, Long> {
-    List<HistoryEntry> findByUserUsername(String username);
+    List<HistoryEntry> findByUserUsernameOrderByDateDesc(String username);
 }

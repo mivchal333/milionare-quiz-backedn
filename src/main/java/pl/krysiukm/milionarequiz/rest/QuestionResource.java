@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/question")
 @RestController
+@CrossOrigin
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class QuestionResource {
     private final QuestionService questionService;

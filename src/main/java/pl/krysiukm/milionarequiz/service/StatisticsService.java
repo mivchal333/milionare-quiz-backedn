@@ -21,7 +21,7 @@ public class StatisticsService {
     }
 
     public List<HistoryEntry> getUserStatistics(User user) {
-        return statisticsRepository.findByUserUsername(user.getUsername());
+        return statisticsRepository.findByUserUsernameOrderByDateDesc(user.getUsername());
     }
 
     public HistoryEntry createHistoryEntry(HistoryEntry historyEntry) {
